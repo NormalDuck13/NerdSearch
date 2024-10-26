@@ -1,19 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const loginButton = document.getElementById('loginButton');
+    const loginFormContainer = document.getElementById('loginFormContainer');
+    const loginForm = document.getElementById('loginForm');
+    const createAccountButton = document.getElementById('createAccountButton');
     const postForm = document.getElementById('postForm');
     const searchForm = document.getElementById('searchForm');
     const resultsDiv = document.getElementById('results');
 
+    let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    let currentAccount = JSON.parse(localStorage.getItem('currentAccount')) || null;
     let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+    if (currentAccount) {
+        postForm.classList.remove('hidden');
+    }
+
+    loginButton.addEventListener('click', () => {
+        loginFormContainer.classList.toggle('hidden');
+    });
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('loginName').value;
+        const password = document.getElementById('loginPassword').value;
+        const account = accounts.find(acc => acc.name === name && acc.password === password);
+        if (account) {
+            currentAccount = account;
+            localStorage.setItem('currentAccount', JSON.stringify(currentAccount));
+            postForm.classList.remove('hidden');
+            loginFormContainer.classList.add('hidden');
+            alert('Logged in successfully!');
+        } else {
+            alert('Incorrect name or password.');
+        }
+    });
+
+    createAccountButton.addEventListener('click', () => {
+        const name = document.getElementById('loginName').value;
+        const password = document.getElementById('loginPassword').value;
+        if (accounts.find(acc => acc.name === name)) {
+            alert('Account name already exists.');
+        } else {
+            const newAccount = { name, password };
+            accounts.push(newAccount);
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            alert('Account created successfully! You can now log in.');
+        }
+    });
 
     postForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const content = document.getElementById('content').value;
-        const name = document.getElementById('name').value;
-        if (content && name) {
-            posts.push({ content, name });
+        if (content && currentAccount) {
+            posts.push({ content, name: currentAccount.name });
             localStorage.setItem('posts', JSON.stringify(posts));
             document.getElementById('content').value = '';
-            document.getElementById('name').value = '';
             displayPosts(posts);
         }
     });
@@ -40,6 +81,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Display all posts initially
     displayPosts(posts);
 });
