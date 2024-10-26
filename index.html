@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NerdSearch</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>NerdSearch</h1>
-    <form id="postForm">
-        <textarea id="content" placeholder="Type your text here..."></textarea><br>
-        <input type="text" id="name" placeholder="Your name"><br>
-        <button type="submit">Post</button>
-    </form>
-    <form id="searchForm">
-        <input type="text" id="query" placeholder="Search..."><br>
-        <button type="submit">Search</button>
-    </form>
-    <div id="results"></div>
+    <header>
+        <h1>NerdSearch</h1>
+    </header>
+    <main>
+        <div class="forms">
+            <form id="postForm">
+                <textarea id="content" placeholder="Type your text here..."></textarea><br>
+                <input type="text" id="name" placeholder="Your name"><br>
+                <button type="submit">Post</button>
+            </form>
+            <form id="searchForm">
+                <input type="text" id="query" placeholder="Search..."><br>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div id="results"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 NerdSearch. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
