@@ -21,7 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const query = document.getElementById('query').value.toLowerCase();
-        const filteredPosts = posts.filter(post => post.content.toLowerCase().includes(query));
+        const queryWords = query.split(' ');
+        const filteredPosts = posts.map(post => {
+            const postWords = post.content.toLowerCase().split(' ');
+            const matchCount = queryWords.reduce((count, word) => count + (postWords.includes(word) ? 1 : 0), 0);
+            return { ...post, matchCount };
+        }).sort((a, b) => b.matchCount - a.matchCount);
         displayPosts(filteredPosts);
     });
 
