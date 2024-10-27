@@ -93,3 +93,42 @@ footer {
     font-size: 0.9em;
     color: #777;
 }
+
+body {
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.circle {
+    position: absolute;
+    background: #add8e6;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.circle1 {
+    width: 150px;
+    height: 150px;
+    top: 50px;
+    left: 100px;
+}
+
+.circle2 {
+    width: 100px;
+    height: 100px;
+    bottom: 100px;
+    right: 50px;
+}
+
+.rectangle {
+    position: absolute;
+    background: #ffb6c1;
+    opacity: 0.6;
+}
+
+.rectangle1 {
+    width: 200px;
+    height: 100px;
+    top: 200px;
+    right: 150px;
+}
